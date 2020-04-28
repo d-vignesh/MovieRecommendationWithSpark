@@ -74,7 +74,7 @@ object MovieLensALS {
 		// movies.take(20).foreach(println)
 
 		// lets use only a subset of the rating df(because of my low system configuration)
-		val ratings = ratings_all.filter(col("userId") <= 600)  
+		val ratings = ratings_all.filter(col("userId"))  
 		val numRatings = ratings.count()
 		val numUsers = ratings.select("userId").distinct().count()
 		val numMovies = ratings.select("movieId").distinct().count()
@@ -149,7 +149,7 @@ object MovieLensALS {
 		val improvement = (baselineRmse - testRmse) / baselineRmse * 100
 		println("the best model improves the base line by " + "%1.2f".format(imporvement) + "%.")
 
-		
+
 		println("Factorized user matrix with rank = " + model.rank)
 		println(model.userFactors.show(5))
 
