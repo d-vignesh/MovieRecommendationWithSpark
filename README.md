@@ -1,0 +1,1 @@
+A movie Recommendation system build with Apache Spark. The recommendation system is build using the Matrix Factorization technique of Collaborative Filtering for factorizing the user and rating matrix and ALS to compute the error.
