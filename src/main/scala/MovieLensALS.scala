@@ -72,7 +72,7 @@ object MovieLensALS {
 		// println(movies.getClass)
 		// println(movies.get(1))
 		// movies.take(20).foreach(println)
- 
+		
 		val numRatings = ratings.count()
 		val numUsers = ratings.select("userId").distinct().count()
 		val numMovies = ratings.select("movieId").distinct().count()
