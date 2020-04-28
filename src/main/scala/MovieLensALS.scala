@@ -43,7 +43,7 @@ object MovieLensALS {
 		val personalRatingsDir = "/home/vignesh/my_drive/Data Science/spark/MovieRecommendationALS/src/main/python"
 		
 		// load movie ratings as Dataset
-		val ratings_all = spark.read
+		val ratings = spark.read
 			.format("csv")
 			.option("header", "true")
 			.load(new File(movieLensHomeDir, "ratings.csv").toString())
@@ -72,9 +72,7 @@ object MovieLensALS {
 		// println(movies.getClass)
 		// println(movies.get(1))
 		// movies.take(20).foreach(println)
-
-		// lets use only a subset of the rating df(because of my low system configuration)
-		val ratings = ratings_all.filter(col("userId") <= 600)  
+ 
 		val numRatings = ratings.count()
 		val numUsers = ratings.select("userId").distinct().count()
 		val numMovies = ratings.select("movieId").distinct().count()
@@ -149,7 +147,7 @@ object MovieLensALS {
 		val improvement = (baselineRmse - testRmse) / baselineRmse * 100
 		println("the best model improves the base line by " + "%1.2f".format(imporvement) + "%.")
 
-		
+
 		println("Factorized user matrix with rank = " + model.rank)
 		println(model.userFactors.show(5))
 
